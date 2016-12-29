@@ -25,6 +25,7 @@ public class JanusActivity extends Activity {
     private VideoRenderer.Callbacks remoteRender;
     private EchoTest echoTest;
     private VideoRoomTest videoRoomTest;
+    private BroadCast broadcast;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -61,9 +62,12 @@ public class JanusActivity extends Activity {
                 String port = ps.getString(SettingsActivity.IPTVACCESS_PORT, "");
                 String uri  = "ws://"+ip+":"+port;
                 EGLContext con = VideoRendererGui.getEGLContext();
-                echoTest = new EchoTest(localRender, remoteRender,uri);
-                echoTest.initializeMediaContext(JanusActivity.this, true, true, true, con);
-                echoTest.Start();
+//                echoTest = new EchoTest(localRender, remoteRender,uri);
+//                echoTest.initializeMediaContext(JanusActivity.this, true, true, true, con);
+//                echoTest.Start();
+                broadcast = new BroadCast(localRender, remoteRender,uri);
+                broadcast.initializeMediaContext(JanusActivity.this, true, true, true, con);
+                broadcast.Start();
 
             } catch (Exception ex) {
                 Log.e("computician.janusclient", ex.getMessage());
